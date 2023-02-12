@@ -9,7 +9,17 @@
   "imageSize": 80,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "34j",
+      "name": "34j",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55338215?v=4",
+      "profile": "https://github.com/34j",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
   "contributorsPerLine": 7,
   "skipCi": true
 }
