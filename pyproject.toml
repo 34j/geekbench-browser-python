@@ -15,7 +15,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "geekbench_browser_python", from = "src" },
+    { include = "geekbench_browser", from = "src" },
 ]
 
 [tool.poetry.urls]
@@ -40,11 +40,11 @@ sphinx-rtd-theme = ">=1.0"
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
-version_variable = "src/geekbench_browser_python/__init__.py:__version__"
+version_variable = "src/geekbench_browser/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov=geekbench_browser_python --cov-report=term-missing:skip-covered"
+addopts = "-v -Wdefault --cov=geekbench_browser --cov-report=term-missing:skip-covered"
 pythonpath = ["src"]
 
 [tool.coverage.run]
@@ -61,7 +61,7 @@ exclude_lines = [
 
 [tool.isort]
 profile = "black"
-known_first_party = ["geekbench_browser_python", "tests"]
+known_first_party = ["geekbench_browser", "tests"]
 
 [tool.mypy]
 check_untyped_defs = true
