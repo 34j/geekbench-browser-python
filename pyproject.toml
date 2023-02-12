@@ -75,6 +75,11 @@ exclude_lines = [
 profile = "black"
 known_first_party = ["geekbench_browser", "tests"]
 
+[tool.autoflake]
+remove_all_unused_imports = true
+remove_unused_variables = true
+ignore-init-module-imports = true
+
 [tool.mypy]
 check_untyped_defs = true
 disallow_any_generics = true
