@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: 3aa4aef
+_src_path: gh:browniebroke/pypackage-template
+add_me_as_contributor: false
+copyright_year: '2022'
+documentation: true
+email: 34j.95a2p@simplelogin.com
+full_name: 34j
+github_username: 34j
+initial_commit: false
+open_source_license: MIT
+package_name: geekbench_browser_python
+project_name: Geekbench Browser Python
+project_short_description: Simple package for getting data from browser.geekbench.com
+project_slug: geekbench-browser-python
+run_poetry_install: false
+setup_github: false
+setup_pre_commit: false
+
