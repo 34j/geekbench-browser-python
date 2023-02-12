@@ -32,6 +32,14 @@
 
 Simple package for getting data from [browser.geekbench.com](https://browser.geekbench.com/).
 
+## Installation
+
+Install this via pip (or your favourite package manager):
+
+```shell
+pip install geekbench-browser-python
+```
+
 ## Usage
 
 Both `geekbench-browser` and `gbr` are available as CLI commands. Requests are cached in `~/.cache/geekbench-browser-python` by default and refreshed every 24 hours.
@@ -119,12 +127,6 @@ Options:
   -v, --verbose                   Verbose output
   -h, --help                      Show this message and exit.
 ```
-
-## Installation
-
-Install this via pip (or your favourite package manager):
-
-`pip install geekbench-browser-python`
 
 ## Contributors ✨
 
