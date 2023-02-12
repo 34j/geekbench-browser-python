@@ -9,7 +9,7 @@ full_name: 34j
 github_username: 34j
 initial_commit: false
 open_source_license: MIT
-package_name: geekbench_browser_python
+package_name: geekbench_browser
 project_name: Geekbench Browser Python
 project_short_description: Simple package for getting data from browser.geekbench.com
 project_slug: geekbench-browser-python

@@ -3,7 +3,7 @@
 To use this package, import it:
 
 ```python
-import geekbench_browser_python
-```
+import geekbench_browser
 
-TODO: Document usage
+data = geekbench_browser.get_data()
+```
