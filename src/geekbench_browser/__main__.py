@@ -119,8 +119,8 @@ def cli(
     if USE_RICH:
         import rich
         import rich.box
-        import rich.table
         import rich.console
+        import rich.table
 
         from ._rich_table import df_to_table
 
