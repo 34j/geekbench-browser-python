@@ -120,6 +120,7 @@ def cli(
         import rich
         import rich.box
         import rich.table
+        import rich.console
 
         from ._rich_table import df_to_table
 
