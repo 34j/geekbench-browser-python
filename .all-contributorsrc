@@ -18,8 +18,19 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "shvchk",
+      "name": "Andrei Shevchuk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/872945?v=4",
+      "profile": "https://github.com/shvchk",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }

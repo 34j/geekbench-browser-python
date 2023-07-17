@@ -140,6 +140,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/34j"><img src="https://avatars.githubusercontent.com/u/55338215?v=4?s=80" width="80px;" alt="34j"/><br /><sub><b>34j</b></sub></a><br /><a href="https://github.com/34j/geekbench-browser-python/commits?author=34j" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/shvchk"><img src="https://avatars.githubusercontent.com/u/872945?v=4?s=80" width="80px;" alt="Andrei Shevchuk"/><br /><sub><b>Andrei Shevchuk</b></sub></a><br /><a href="https://github.com/34j/geekbench-browser-python/issues?q=author%3Ashvchk" title="Bug reports">🐛</a> <a href="https://github.com/34j/geekbench-browser-python/commits?author=shvchk" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
