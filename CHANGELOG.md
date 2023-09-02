@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.4 (2023-09-02)
+
+### Fix
+
+* **__main__:** Fix ImportError for rich.console ([#82](https://github.com/34j/geekbench-browser-python/issues/82)) ([`5e2bf6f`](https://github.com/34j/geekbench-browser-python/commit/5e2bf6fa6201207dd8355267a3dbfd7c2a3cd781))
+
+### Documentation
+
+* Add shvchk as a contributor for bug, and code ([#83](https://github.com/34j/geekbench-browser-python/issues/83)) ([`5ad5ed9`](https://github.com/34j/geekbench-browser-python/commit/5ad5ed9c74b34ddc3ac93c525945563d665ee4ab))
+
 ## v0.1.3 (2023-03-27)
 ### Fix
 * **deps:** Update dependency rich to v13.3.3 ([#20](https://github.com/34j/geekbench-browser-python/issues/20)) ([`1625a15`](https://github.com/34j/geekbench-browser-python/commit/1625a1534e50af7b7df7bcec6d4d05e5ed9c6066))
