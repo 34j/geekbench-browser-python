@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.7 (2023-11-15)
+
+### Fix
+
+* **deps:** Update dependency rich to v13.7.0 ([#144](https://github.com/34j/geekbench-browser-python/issues/144)) ([`791dcdc`](https://github.com/34j/geekbench-browser-python/commit/791dcdcdc977cd62ce9e32dd7315804281dafa98))
+
 ## v0.1.6 (2023-09-30)
 
 ### Fix
