@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.8 (2023-11-19)
+
+### Fix
+
+* **deps:** Update dependency requests-cache to v1.1.1 ([#146](https://github.com/34j/geekbench-browser-python/issues/146)) ([`a77d49b`](https://github.com/34j/geekbench-browser-python/commit/a77d49b83346b2d3a034fdf435b781d169f95e30))
+
 ## v0.1.7 (2023-11-15)
 
 ### Fix
