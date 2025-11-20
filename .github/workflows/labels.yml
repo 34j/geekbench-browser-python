@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.13
+          python-version: 3.14
       - name: Install labels
         run: pip install labels
       - name: Sync config with Github
