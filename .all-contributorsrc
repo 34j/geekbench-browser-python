@@ -3,9 +3,7 @@
   "projectOwner": "34j",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 80,
   "commit": true,
   "commitConvention": "angular",
@@ -15,19 +13,14 @@
       "name": "34j",
       "avatar_url": "https://avatars.githubusercontent.com/u/55338215?v=4",
       "profile": "https://github.com/34j",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "shvchk",
       "name": "Andrei Shevchuk",
       "avatar_url": "https://avatars.githubusercontent.com/u/872945?v=4",
       "profile": "https://github.com/shvchk",
-      "contributions": [
-        "bug",
-        "code"
-      ]
+      "contributions": ["bug", "code"]
     }
   ],
   "contributorsPerLine": 7,
