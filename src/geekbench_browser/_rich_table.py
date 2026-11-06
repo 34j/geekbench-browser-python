@@ -1,4 +1,4 @@
-from typing import Optional
+# ruff: noqa: FBT001, FBT002, PD011
 
 import pandas as pd
 from rich.table import Table
@@ -8,7 +8,7 @@ def df_to_table(
     pandas_dataframe: pd.DataFrame,
     rich_table: Table,
     show_index: bool = True,
-    index_name: Optional[str] = None,
+    index_name: str | None = None,
 ) -> Table:
     """Convert a pandas.DataFrame obj into a rich.Table obj.
 
@@ -25,8 +25,9 @@ def df_to_table(
 
     Returns:
         Table:
-            The rich Table instance passed, populated with the DataFrame values."""
+            The rich Table instance passed, populated with the DataFrame values.
 
+    """
     if show_index:
         index_name = str(index_name) if index_name else ""
         rich_table.add_column(index_name)

@@ -1,3 +1,5 @@
+# ruff: noqa: PLC2701, PT009
+
 from unittest import TestCase
 
 from pandas import DataFrame

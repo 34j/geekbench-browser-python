@@ -1,8 +1,9 @@
+# ruff: noqa: ANN204, SLF001
+
 from typing import Any
 
 import click
-from click import Context, OptionParser
-from click.parser import ParsingState
+from click import Context
 
 
 class OptionEatAll(click.Option):
@@ -13,8 +14,8 @@ class OptionEatAll(click.Option):
             raise ValueError(f"nargs, if set, must be -1 not {nargs}")
         super().__init__(*args, **kwargs)
 
-    def add_to_parser(self, parser: OptionParser, ctx: Context) -> None:
-        def parser_process(value: str, state: ParsingState) -> None:
+    def add_to_parser(self, parser: Any, ctx: Context) -> None:
+        def parser_process(value: str, state: Any) -> None:
             # method to hook to the parser.process
             done = False
             values = [value]

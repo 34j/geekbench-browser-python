@@ -1,3 +1,5 @@
+# ruff: noqa: G004, PD002, RET504
+
 from logging import getLogger
 from pathlib import Path
 
@@ -11,9 +13,7 @@ GEEKBENCH_URL = "https://browser.geekbench.com/processor-benchmarks.json"
 
 
 def get_data() -> DataFrame:
-    with CachedSession(
-        CACHE_PATH.as_posix(), backend="sqlite", expire_after=86400
-    ) as session:
+    with CachedSession(CACHE_PATH.as_posix(), backend="sqlite", expire_after=86400) as session:
         resp = session.get(GEEKBENCH_URL)
         LOG.info(
             f"Last retrieved: {resp.created_at}, Cache expires: {resp.expires}, "
@@ -28,13 +28,9 @@ def get_data() -> DataFrame:
         df.set_index("name", inplace=True, drop=False)
         df.index.name = None
         df["frequency"] = (
-            df["description"]
-            .str.extract(r"(\d+\.?\d+) [MG]Hz")
-            .astype(float, errors="ignore")
+            df["description"].str.extract(r"(\d+\.?\d+) [MG]Hz").astype(float, errors="ignore")
         )
         df.loc[df["description"].str.contains("MHz"), "frequency"] *= 1e-3
-        df["cores"] = (
-            df["description"].str.extract(r"(\d+) cores").astype(int, errors="ignore")
-        )
+        df["cores"] = df["description"].str.extract(r"(\d+) cores").astype(int, errors="ignore")
         df = df.rename(columns={"score": "single", "multicore_score": "multi"})
         return df
