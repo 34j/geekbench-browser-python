@@ -9,7 +9,7 @@ description = "Simple package for getting data from browser.geekbench.com"
 readme = "README.md"
 license = "MIT"
 authors = [
-  { name = "34j", email = "34j.95a2p@simplelogin.com" },
+  { name = "34j" },
 ]
 requires-python = ">=3.12"
 classifiers = [
@@ -57,10 +57,3 @@ max_supported_python = "3.14"
 
 [tool.ty]
 terminal.error-on-warning = true
-
-[tool.semantic_release]
-allow_zero_version = true
-version_variables = [
-  "src/geekbench_browser/__init__.py:__version__",
-  "docs/conf.py:release",
-]
