@@ -26,7 +26,7 @@ classifiers = [
 dependencies = [
   "click",
   "nodriver>=0.50.99",
-  "pandas>=1.3",
+  "pandas>=1.5.3",
   "py-cpuinfo>=9",
   "rich>=15.0.0",
 ]
