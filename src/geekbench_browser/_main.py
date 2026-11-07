@@ -19,7 +19,7 @@ def get_data() -> DataFrame:
             f"Last retrieved: {resp.created_at}, Cache expires: {resp.expires}, "
             f"Cache path: {CACHE_PATH}"
         )
-
+        
         json_data = session.get(GEEKBENCH_URL).json()
         try:
             df = DataFrame(json_data["devices"])
