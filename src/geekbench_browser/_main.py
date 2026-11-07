@@ -25,8 +25,7 @@ async def _get_json() -> dict:
         return loads(await page.evaluate("document.body.innerText", return_by_value=True))
     finally:
         await browser.aclose()
-        browser._process.terminate()
-        await browser._process.wait()
+        browser.stop()
 
 
 def get_data() -> DataFrame:
