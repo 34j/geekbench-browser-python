@@ -1,3 +1,5 @@
+# ruff: noqa: C901, D103, FBT001, PLC0415, PLR6201, N806
+
 from logging import INFO, basicConfig, getLogger
 
 import click
@@ -21,9 +23,7 @@ LOG = getLogger(__name__)
 @click.option("--min-multi", "-mm", type=float, help="Minimum multi core score")
 @click.option("--max-multi", "-xm", type=float, help="Maximum multi core score")
 @click.option("--icon", "-i", cls=OptionEatAll, type=tuple, help="Icon to search for")
-@click.option(
-    "--family", "-f", cls=OptionEatAll, type=tuple, help="Family to search for"
-)
+@click.option("--family", "-f", cls=OptionEatAll, type=tuple, help="Family to search for")
 @click.option(
     "--sort",
     "-s",
@@ -59,7 +59,7 @@ def cli(
 
         # get current cpu name
         name = cpuinfo.get_cpu_info()["brand_raw"]
-        LOG.info(f"Current CPU: {name}")
+        LOG.info("Current CPU: %s", name)
 
         # geekbench cpuname is shorter than cpuinfo brand_raw
         current_names = data.loc[data["name"].map(lambda x: x in name)]["name"]
@@ -71,9 +71,7 @@ def cli(
 
     # filter data
     if names:
-        data = data.loc[
-            data["name"].str.contains("|".join(names), regex=True, case=False)
-        ]
+        data = data.loc[data["name"].str.contains("|".join(names), regex=True, case=False)]
     if min_cores:
         data = data.loc[data["cores"] >= min_cores]
     if max_cores:
@@ -92,15 +90,11 @@ def cli(
         data = data.loc[data["multi"] <= max_multi]
     if icon:
         data = data.loc[
-            data["icon"]
-            .astype(str)
-            .str.contains("|".join(icon), regex=True, case=False)
+            data["icon"].astype(str).str.contains("|".join(icon), regex=True, case=False)
         ]
     if family:
         data = data.loc[
-            data["family"]
-            .astype(str)
-            .str.contains("|".join(family), regex=True, case=False)
+            data["family"].astype(str).str.contains("|".join(family), regex=True, case=False)
         ]
 
     # sort data
@@ -111,14 +105,10 @@ def cli(
     # drop columns that does not make sense
     if not verbose:
         data = data.drop(columns=["cores", "frequency", "id", "name"])
-    data = data.reindex(
-        columns=["description", "single", "multi", "icon", "family", "samples"]
-    )
+    data = data.reindex(columns=["description", "single", "multi", "icon", "family", "samples"])
 
     USE_RICH = True
     if USE_RICH:
-        import rich
-        import rich.box
         import rich.console
         import rich.table
 

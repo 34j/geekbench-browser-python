@@ -11,76 +11,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
-      - uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4
-        with:
-          python-version: "3.15"
-      - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
-
-  # Make sure commit messages follow the conventional commits convention:
-  # https://www.conventionalcommits.org
-  commitlint:
-    name: Lint Commit Messages
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
-        with:
-          fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@9763196e10f27aef304c9b8b660d31d97fce0f99 # v5.5.1
-
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version:
-          - "3.8"
-          - "3.11"
-        os:
-          - ubuntu-latest
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
-      - name: Set up Python
-        uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - uses: snok/install-poetry@a783c322200f0519c7926aa6faa857c4e23e9263 # v1.4.2
-      - name: Install Dependencies
-        run: poetry install
-        shell: bash
-      - name: Test with Pytest
-        run: poetry run pytest --cov-report=xml
-        shell: bash
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-  release:
+  ci:
+    uses: 34j/.github/.github/workflows/python-package-ci.yml@main
+    permissions:
+      attestations: write
+      contents: write
+      id-token: write
+  publish:
+    if: needs.ci.outputs.released == 'true'
+    needs: ci
     runs-on: ubuntu-latest
     environment: release
-    if: github.ref == 'refs/heads/main'
-    needs:
-      - test
-      - lint
-      - commitlint
-
+    permissions:
+      id-token: write
     steps:
-      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
+      - uses: actions/download-artifact@v4
         with:
-          fetch-depth: 0
-
-      # Run semantic release:
-      # - Update CHANGELOG.md
-      # - Update version in code
-      # - Create git tag
-      # - Create GitHub release
-      # - Publish to PyPI
-      - name: Python Semantic Release
-        uses: relekang/python-semantic-release@c633414ae2a5518d21b852be66eac1cbc2dd8e87 # v7.34.6
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          name: python-package-dist
+          path: dist
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.14.0
