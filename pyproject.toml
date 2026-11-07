@@ -40,7 +40,7 @@ scripts.geekbench-browser = "geekbench_browser.__main__:cli"
 [dependency-groups]
 dev = [
   "coverage",
-  "packaging-34j[test]>=1.1.3",
+  "packaging-34j[test]>=1.1.5",
   "pytest",
   "pytest-cov",
   "ty",
