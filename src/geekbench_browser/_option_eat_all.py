@@ -1,4 +1,4 @@
-# ruff: file-ignore[missing-return-type-special-method, private-member-access]
+# ruff: file-ignore[missing-return-type-special-method]
 
 from typing import Any
 

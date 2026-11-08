@@ -1,4 +1,4 @@
-# ruff: file-ignore[complex-structure, undocumented-public-function, boolean-type-hint-positional-argument, import-outside-top-level, literal-membership, non-lowercase-variable-in-function]
+# ruff: file-ignore[undocumented-public-function, boolean-type-hint-positional-argument, literal-membership]
 
 from logging import INFO, basicConfig, getLogger
 
