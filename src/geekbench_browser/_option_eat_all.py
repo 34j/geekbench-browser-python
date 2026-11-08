@@ -1,4 +1,4 @@
-# ruff: noqa: ANN204, SLF001
+# ruff: file-ignore[missing-return-type-special-method, private-member-access]
 
 from typing import Any
 

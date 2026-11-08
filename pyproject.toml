@@ -28,7 +28,7 @@ dependencies = [
   "nodriver>=0.50.99",
   "pandas>=1.5.3",
   "py-cpuinfo>=9",
-  "rich>=15.0.0",
+  "rich>=15",
 ]
 urls."Bug Tracker" = "https://github.com/34j/geekbench-browser-python/issues"
 urls.Changelog = "https://github.com/34j/geekbench-browser-python/blob/main/CHANGELOG.md"

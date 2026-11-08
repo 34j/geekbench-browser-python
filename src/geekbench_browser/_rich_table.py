@@ -1,4 +1,4 @@
-# ruff: noqa: FBT001, FBT002, PD011
+# ruff: file-ignore[boolean-type-hint-positional-argument, boolean-default-value-positional-argument, pandas-use-of-dot-values]
 
 import pandas as pd
 from rich.table import Table

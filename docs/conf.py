@@ -1,1 +1,1 @@
-from packaging_34j.conf import *  # noqa: F403
+from packaging_34j.conf import *  # ruff: ignore[undefined-local-with-import-star]

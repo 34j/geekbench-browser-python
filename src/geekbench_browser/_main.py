@@ -1,4 +1,4 @@
-# ruff: noqa: PD002, RET504
+# ruff: file-ignore[pandas-use-of-inplace-argument, unnecessary-assign]
 
 import asyncio
 from json import dumps, loads

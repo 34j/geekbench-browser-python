@@ -1,4 +1,4 @@
-# ruff: noqa: C901, D103, FBT001, PLC0415, PLR6201, N806
+# ruff: file-ignore[complex-structure, undocumented-public-function, boolean-type-hint-positional-argument, import-outside-top-level, literal-membership, non-lowercase-variable-in-function]
 
 from logging import INFO, basicConfig, getLogger
 
