@@ -4,7 +4,7 @@ requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "geekbench-browser-python"
-version = "0.1.10"
+version = "1.0.0"
 description = "Simple package for getting data from browser.geekbench.com"
 readme = "README.md"
 license = "MIT"
