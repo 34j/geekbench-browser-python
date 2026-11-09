@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: 34j/.github/.github/workflows/python-package-ci.yml@4b672e6833ffe6204b173099bee0a7fdbfaa34c9 # main
+    uses: 34j/.github/.github/workflows/python-package-ci.yml@55fb495fefc39aba7f245cb42f3adade6ebbd4f6 # main
     permissions:
       attestations: write
       contents: write
