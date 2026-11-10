@@ -121,4 +121,5 @@ def cli(
         click.echo(data)
 
 
-cli()
+if __name__ == "__main__":
+    cli()
