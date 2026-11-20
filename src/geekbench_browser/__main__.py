@@ -3,7 +3,9 @@
 from logging import INFO, basicConfig, getLogger
 
 import click
+import rich.console
 
+from ._breakdown import Device
 from ._main import get_data
 from ._option_eat_all import OptionEatAll
 
@@ -32,6 +34,21 @@ LOG = getLogger(__name__)
     help="Sort by (reverse is default except for name, id)",
 )
 @click.option("--reverse", "-r", is_flag=True, help="Reverse the sort order")
+@click.option("--bars/--no-bars", "-b/-B", default=True, help="Show bar graphs for scores")
+@click.option("--bar-width", "-bw", type=click.IntRange(min=1), default=20, help="Bar graph width")
+@click.option(
+    "--breakdown",
+    "-d",
+    is_flag=True,
+    help="Also graph the individual workload scores of a representative result per CPU",
+)
+@click.option(
+    "--breakdown-limit",
+    "-dl",
+    type=click.IntRange(min=1),
+    default=5,
+    help="Maximum number of CPUs to show a breakdown for",
+)
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 def cli(
     names: list[str],
@@ -47,6 +64,10 @@ def cli(
     family: list[str],
     sort: str,
     reverse: bool,
+    bars: bool,
+    bar_width: int,
+    breakdown: bool,
+    breakdown_limit: int,
     verbose: bool,
 ) -> None:
     if verbose:
@@ -102,6 +123,18 @@ def cli(
         reverse = not reverse
     data.sort_values(by=sort, inplace=True, ascending=reverse)
 
+    breakdown_devices = [
+        (
+            int(row.id),
+            str(row.name),
+            float(row.single),
+            float(row.multi),
+            None if row.cores != row.cores else int(row.cores),
+        )
+        for row in data.head(breakdown_limit).itertuples(index=False)
+    ]
+    breakdown_skipped = max(len(data) - breakdown_limit, 0)
+
     # drop columns that does not make sense
     if not verbose:
         data = data.drop(columns=["cores", "frequency", "id", "name"])
@@ -116,9 +149,63 @@ def cli(
 
         console = rich.console.Console()
         table = rich.table.Table()
-        console.print(df_to_table(data, table))
+        bar_columns = ("single", "multi") if bars else ()
+        console.print(df_to_table(data, table, bar_columns=bar_columns, bar_width=bar_width))
+        if breakdown:
+            _print_breakdowns(console, breakdown_devices, breakdown_skipped, bar_columns, bar_width)
     else:
         click.echo(data)
+
+
+def _print_breakdowns(
+    console: rich.console.Console,
+    devices: list[Device],
+    skipped: int,
+    bar_columns: tuple[str, ...],
+    bar_width: int,
+) -> None:
+    import pandas as pd
+    import rich.table
+
+    from ._breakdown import get_breakdowns
+    from ._rich_table import df_to_table
+
+    breakdowns = get_breakdowns(devices)
+    frames = [
+        None if b is None else pd.DataFrame({"single": b.single, "multi": b.multi})
+        for b in breakdowns
+    ]
+    # one scale for every CPU so the bars are comparable across tables
+    shown = [f for f in frames if f is not None]
+    maximums = {c: max(f[c].max() for f in shown) for c in ("single", "multi")} if shown else {}
+
+    for device, b, frame in zip(devices, breakdowns, frames, strict=True):
+        if b is None or frame is None:
+            console.print(f"[yellow]No recent result found for {device[1]}[/yellow]")
+            continue
+        table = rich.table.Table(
+            title=f"{b.name} workloads",
+            caption=(
+                f"From one representative result (single {b.single_score}, "
+                f"multi {b.multi_score}; chart {device[2]:.0f}, {device[3]:.0f}): {b.url}"
+            ),
+        )
+        console.print()
+        console.print(
+            df_to_table(
+                frame,
+                table,
+                index_name="workload",
+                bar_columns=bar_columns,
+                bar_width=bar_width,
+                bar_maximums=maximums,
+            )
+        )
+    if skipped:
+        console.print(
+            f"[dim]Breakdown shown for the first {len(devices)} CPUs only "
+            f"({skipped} more matched; raise --breakdown-limit to see them).[/dim]"
+        )
 
 
 cli()
