@@ -1,7 +1,7 @@
 # ruff: file-ignore[pandas-use-of-inplace-argument, unnecessary-assign]
 
 import asyncio
-from json import dumps, loads
+from json import JSONDecodeError, dumps, loads
 from pathlib import Path
 from time import time
 
@@ -11,6 +11,7 @@ from pandas import DataFrame
 CACHE_PATH = Path.home() / ".cache" / "geekbench_browser"
 CACHE_FILE = CACHE_PATH / "processor-benchmarks.json"
 CACHE_EXPIRE_AFTER = 86400
+LOAD_ATTEMPTS = 30
 GEEKBENCH_URL = "https://browser.geekbench.com/processor-benchmarks.json"
 
 
@@ -22,7 +23,17 @@ async def _get_json() -> dict:
     )
     try:
         page = await browser.get(GEEKBENCH_URL)
-        return loads(await page.evaluate("document.body.innerText", return_by_value=True))
+        # The JSON is large and may still be streaming in (or sitting behind a
+        # bot-check interstitial) when first read, so retry until it parses.
+        for attempt in range(LOAD_ATTEMPTS):
+            text = await page.evaluate("document.body.innerText", return_by_value=True)
+            try:
+                return loads(text)
+            except (JSONDecodeError, TypeError):
+                if attempt == LOAD_ATTEMPTS - 1:
+                    raise
+                await asyncio.sleep(1)
+        raise AssertionError("unreachable")
     finally:
         await browser.aclose()
         browser.stop()
