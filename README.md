@@ -111,6 +111,26 @@ $ gbr "ryzen 9" -s single
 └────────────────────┴────────────────────┴────────┴───────┴────────────┴───────────┴─────────┘
 ```
 
+- Bar graphs
+
+The single and multi scores are drawn as bars, each scaled to the largest score shown. Use `--no-bars` for a plain table.
+
+```shell
+$ gbr "Ryzen 9 9" -s multi
+```
+
+![Table of Ryzen 9 9000 CPUs with bar graphs for single and multi scores](docs/images/bars.png)
+
+- Workload breakdown
+
+`--breakdown` adds one table per CPU graphing the individual workloads (File Compression, Clang, Ray Tracer, ...) behind the scores. The chart data only has the totals, so these come from one user-submitted result for that CPU: the recent result with the same core count whose scores are closest to the chart scores. The result is linked under each table.
+
+```shell
+$ gbr "Ryzen 9 9950X$" --breakdown
+```
+
+![Per-workload bar graphs for the AMD Ryzen 9 9950X](docs/images/breakdown.png)
+
 - All options
 
 ```shell
@@ -131,7 +151,14 @@ Options:
   -s, --sort [name|single|multi|frequency|cores|id]
                                   Sort by (reverse is default except for name,
                                   id)
-  -r, --reverse                  Reverse the sort order
+  -r, --reverse                   Reverse the sort order
+  -b, --bars / -B, --no-bars      Show bar graphs for scores
+  -bw, --bar-width INTEGER RANGE  Bar graph width  [x>=1]
+  -d, --breakdown                 Also graph the individual workload scores of
+                                  a representative result per CPU
+  -dl, --breakdown-limit INTEGER RANGE
+                                  Maximum number of CPUs to show a breakdown
+                                  for  [x>=1]
   -v, --verbose                   Verbose output
   -h, --help                      Show this message and exit.
 ```
